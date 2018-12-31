@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinyuan.main.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.xinyuan.main.domain.Product" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="product_code" property="productCode" jdbcType="VARCHAR" />
+    <result column="small_id" property="smallId" jdbcType="INTEGER" />
+    <result column="ordinary_price" property="ordinaryPrice" jdbcType="DECIMAL" />
+    <result column="preferential_price" property="preferentialPrice" jdbcType="DECIMAL" />
+    <result column="preview_picture" property="previewPicture" jdbcType="VARCHAR" />
+    <result column="shelf_time" property="shelfTime" jdbcType="TIMESTAMP" />
+    <result column="click_number" property="clickNumber" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="product_description" property="productDescription" jdbcType="VARCHAR" />
+    <result column="seller" property="seller" jdbcType="INTEGER" />
+    <result column="inventory" property="inventory" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, product_code, small_id, ordinary_price, preferential_price, preview_picture, 
+    shelf_time, click_number, weight, product_description, seller, inventory
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xinyuan.main.domain.Product" >
+    insert into product (id, name, product_code, 
+      small_id, ordinary_price, preferential_price, 
+      preview_picture, shelf_time, click_number, 
+      weight, product_description, seller, 
+      inventory)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{productCode,jdbcType=VARCHAR}, 
+      #{smallId,jdbcType=INTEGER}, #{ordinaryPrice,jdbcType=DECIMAL}, #{preferentialPrice,jdbcType=DECIMAL}, 
+      #{previewPicture,jdbcType=VARCHAR}, #{shelfTime,jdbcType=TIMESTAMP}, #{clickNumber,jdbcType=INTEGER}, 
+      #{weight,jdbcType=INTEGER}, #{productDescription,jdbcType=VARCHAR}, #{seller,jdbcType=INTEGER}, 
+      #{inventory,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="productCode != null" >
+        product_code,
+      </if>
+      <if test="smallId != null" >
+        small_id,
+      </if>
+      <if test="ordinaryPrice != null" >
+        ordinary_price,
+      </if>
+      <if test="preferentialPrice != null" >
+        preferential_price,
+      </if>
+      <if test="previewPicture != null" >
+        preview_picture,
+      </if>
+      <if test="shelfTime != null" >
+        shelf_time,
+      </if>
+      <if test="clickNumber != null" >
+        click_number,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="productDescription != null" >
+        product_description,
+      </if>
+      <if test="seller != null" >
+        seller,
+      </if>
+      <if test="inventory != null" >
+        inventory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="smallId != null" >
+        #{smallId,jdbcType=INTEGER},
+      </if>
+      <if test="ordinaryPrice != null" >
+        #{ordinaryPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="preferentialPrice != null" >
+        #{preferentialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="previewPicture != null" >
+        #{previewPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="shelfTime != null" >
+        #{shelfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clickNumber != null" >
+        #{clickNumber,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="productDescription != null" >
+        #{productDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null" >
+        #{seller,jdbcType=INTEGER},
+      </if>
+      <if test="inventory != null" >
+        #{inventory,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinyuan.main.domain.Product" >
+    update product
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null" >
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="smallId != null" >
+        small_id = #{smallId,jdbcType=INTEGER},
+      </if>
+      <if test="ordinaryPrice != null" >
+        ordinary_price = #{ordinaryPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="preferentialPrice != null" >
+        preferential_price = #{preferentialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="previewPicture != null" >
+        preview_picture = #{previewPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="shelfTime != null" >
+        shelf_time = #{shelfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clickNumber != null" >
+        click_number = #{clickNumber,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="productDescription != null" >
+        product_description = #{productDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null" >
+        seller = #{seller,jdbcType=INTEGER},
+      </if>
+      <if test="inventory != null" >
+        inventory = #{inventory,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinyuan.main.domain.Product" >
+    update product
+    set name = #{name,jdbcType=VARCHAR},
+      product_code = #{productCode,jdbcType=VARCHAR},
+      small_id = #{smallId,jdbcType=INTEGER},
+      ordinary_price = #{ordinaryPrice,jdbcType=DECIMAL},
+      preferential_price = #{preferentialPrice,jdbcType=DECIMAL},
+      preview_picture = #{previewPicture,jdbcType=VARCHAR},
+      shelf_time = #{shelfTime,jdbcType=TIMESTAMP},
+      click_number = #{clickNumber,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      product_description = #{productDescription,jdbcType=VARCHAR},
+      seller = #{seller,jdbcType=INTEGER},
+      inventory = #{inventory,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
