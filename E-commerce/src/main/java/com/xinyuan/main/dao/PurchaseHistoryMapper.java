@@ -1,7 +1,9 @@
 package com.xinyuan.main.dao;
 
 import com.xinyuan.main.domain.PurchaseHistory;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface PurchaseHistoryMapper {
     int deleteByPrimaryKey(Integer id);
 

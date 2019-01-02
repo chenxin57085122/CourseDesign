@@ -1,7 +1,9 @@
 package com.xinyuan.main.dao;
 
 import com.xinyuan.main.domain.LargeSort;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface LargeSortMapper {
     int deleteByPrimaryKey(Integer id);
 

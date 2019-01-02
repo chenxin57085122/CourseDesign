@@ -1,8 +1,9 @@
 package com.xinyuan.main.dao;
 
 import com.xinyuan.main.domain.Region;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public interface RegionMapper {
     int deleteByPrimaryKey(Short id);
 
