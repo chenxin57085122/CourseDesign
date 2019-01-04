@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinyuan.main.dao.PlateContentMapper" >
+  <resultMap id="BaseResultMap" type="com.xinyuan.main.domain.PlateContent" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="plate_id" property="plateId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
+    <result column="ful_url" property="fulUrl" jdbcType="VARCHAR" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="pic_url2" property="picUrl2" jdbcType="VARCHAR" />
+    <result column="pic_url3" property="picUrl3" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="sub_title" property="subTitle" jdbcType="VARCHAR" />
+    <result column="product_img_big" property="productImgBig" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, plate_id, type, product_id, sort_order, ful_url, pic_url, pic_url2, pic_url3,
+    created, updated, sale_price, product_name, sub_title, product_img_big
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from plate_content
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from plate_content
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xinyuan.main.domain.PlateContent" >
+    insert into plate_content (id, plate_id, type,
+      product_id, sort_order, ful_url,
+      pic_url, pic_url2, pic_url3,
+      created, updated, sale_price,
+      product_name, sub_title, product_img_big
+      )
+    values (#{id,jdbcType=INTEGER}, #{plateId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR},
+      #{productId,jdbcType=INTEGER}, #{sortOrder,jdbcType=INTEGER}, #{fulUrl,jdbcType=VARCHAR},
+      #{picUrl,jdbcType=VARCHAR}, #{picUrl2,jdbcType=VARCHAR}, #{picUrl3,jdbcType=VARCHAR},
+      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}, #{salePrice,jdbcType=DECIMAL},
+      #{productName,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR}, #{productImgBig,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.PlateContent" keyProperty="id" useGeneratedKeys="true">
+    insert into plate_content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="plateId != null" >
+        plate_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="sortOrder != null" >
+        sort_order,
+      </if>
+      <if test="fulUrl != null" >
+        ful_url,
+      </if>
+      <if test="picUrl != null" >
+        pic_url,
+      </if>
+      <if test="picUrl2 != null" >
+        pic_url2,
+      </if>
+      <if test="picUrl3 != null" >
+        pic_url3,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+      <if test="updated != null" >
+        updated,
+      </if>
+      <if test="salePrice != null" >
+        sale_price,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="subTitle != null" >
+        sub_title,
+      </if>
+      <if test="productImgBig != null" >
+        product_img_big,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="plateId != null" >
+        #{plateId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="sortOrder != null" >
+        #{sortOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fulUrl != null" >
+        #{fulUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl2 != null" >
+        #{picUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl3 != null" >
+        #{picUrl3,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salePrice != null" >
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null" >
+        #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productImgBig != null" >
+        #{productImgBig,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinyuan.main.domain.PlateContent" >
+    update plate_content
+    <set >
+      <if test="plateId != null" >
+        plate_id = #{plateId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="sortOrder != null" >
+        sort_order = #{sortOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fulUrl != null" >
+        ful_url = #{fulUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl2 != null" >
+        pic_url2 = #{picUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl3 != null" >
+        pic_url3 = #{picUrl3,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salePrice != null" >
+        sale_price = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null" >
+        sub_title = #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productImgBig != null" >
+        product_img_big = #{productImgBig,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllByPlateId" resultMap="BaseResultMap" parameterType="int">
+    SELECT <include refid="Base_Column_List"/>
+    FROM plate_content WHERE plate_id = #{plateId}
+  </select>
+</mapper>

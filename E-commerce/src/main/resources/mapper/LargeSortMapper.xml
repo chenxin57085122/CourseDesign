@@ -18,24 +18,17 @@
     delete from large_sort
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xinyuan.main.domain.LargeSort" >
-    insert into large_sort (id, name)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.LargeSort" >
+
+  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.LargeSort" keyProperty="id" useGeneratedKeys="true">
     insert into large_sort
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
+
       <if test="name != null" >
         name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
+
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
@@ -50,9 +43,5 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xinyuan.main.domain.LargeSort" >
-    update large_sort
-    set name = #{name,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

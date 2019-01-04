@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
+//@CrossOrigin
 public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(UserController.class);

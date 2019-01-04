@@ -6,17 +6,25 @@ import java.util.Date;
 public class Product {
     private Integer id;
 
-    private String name;
+    private String productId;
 
-    private String productCode;
+    private String productName;
 
     private Integer smallId;
 
+    private String subTitle;
+
+    private Integer limitNum;
+
     private BigDecimal ordinaryPrice;
 
-    private BigDecimal preferentialPrice;
+    private BigDecimal salelPrice;
 
-    private String previewPicture;
+    private String productImageBig;
+
+    private String detail;
+
+    private String productImageSmall;
 
     private Date shelfTime;
 
@@ -24,11 +32,7 @@ public class Product {
 
     private Integer weight;
 
-    private String productDescription;
-
     private Integer seller;
-
-    private Integer inventory;
 
     public Integer getId() {
         return id;
@@ -38,20 +42,20 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setProductId(String productId) {
+        this.productId = productId == null ? null : productId.trim();
     }
 
-    public String getProductCode() {
-        return productCode;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductCode(String productCode) {
-        this.productCode = productCode == null ? null : productCode.trim();
+    public void setProductName(String productName) {
+        this.productName = productName == null ? null : productName.trim();
     }
 
     public Integer getSmallId() {
@@ -62,6 +66,22 @@ public class Product {
         this.smallId = smallId;
     }
 
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle == null ? null : subTitle.trim();
+    }
+
+    public Integer getLimitNum() {
+        return limitNum;
+    }
+
+    public void setLimitNum(Integer limitNum) {
+        this.limitNum = limitNum;
+    }
+
     public BigDecimal getOrdinaryPrice() {
         return ordinaryPrice;
     }
@@ -70,20 +90,36 @@ public class Product {
         this.ordinaryPrice = ordinaryPrice;
     }
 
-    public BigDecimal getPreferentialPrice() {
-        return preferentialPrice;
+    public BigDecimal getSalelPrice() {
+        return salelPrice;
     }
 
-    public void setPreferentialPrice(BigDecimal preferentialPrice) {
-        this.preferentialPrice = preferentialPrice;
+    public void setSalelPrice(BigDecimal salelPrice) {
+        this.salelPrice = salelPrice;
     }
 
-    public String getPreviewPicture() {
-        return previewPicture;
+    public String getProductImageBig() {
+        return productImageBig;
     }
 
-    public void setPreviewPicture(String previewPicture) {
-        this.previewPicture = previewPicture == null ? null : previewPicture.trim();
+    public void setProductImageBig(String productImageBig) {
+        this.productImageBig = productImageBig == null ? null : productImageBig.trim();
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail == null ? null : detail.trim();
+    }
+
+    public String getProductImageSmall() {
+        return productImageSmall;
+    }
+
+    public void setProductImageSmall(String productImageSmall) {
+        this.productImageSmall = productImageSmall == null ? null : productImageSmall.trim();
     }
 
     public Date getShelfTime() {
@@ -110,27 +146,11 @@ public class Product {
         this.weight = weight;
     }
 
-    public String getProductDescription() {
-        return productDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription == null ? null : productDescription.trim();
-    }
-
     public Integer getSeller() {
         return seller;
     }
 
     public void setSeller(Integer seller) {
         this.seller = seller;
-    }
-
-    public Integer getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Integer inventory) {
-        this.inventory = inventory;
     }
 }

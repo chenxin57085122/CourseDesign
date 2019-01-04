@@ -15,5 +15,4 @@ public interface PurchaseHistoryMapper {
 
     int updateByPrimaryKeySelective(PurchaseHistory record);
 
-    int updateByPrimaryKey(PurchaseHistory record);
 }

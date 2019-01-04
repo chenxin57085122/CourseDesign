@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @Auther: chenxin
@@ -19,6 +20,7 @@ public class ServiceVO<T> implements Serializable {
     private  T content = null;
     private   String message = "success";
     private   int code = 1;
+    private Long time = new Date().getTime();
 
     public ServiceVO(T content){
         this.content = content;

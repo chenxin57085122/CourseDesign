@@ -19,18 +19,11 @@
     delete from middle_sort
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xinyuan.main.domain.MiddleSort" >
-    insert into middle_sort (id, large_id, name
-      )
-    values (#{id,jdbcType=INTEGER}, #{largeId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.MiddleSort" >
+
+  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.MiddleSort" keyProperty="id" useGeneratedKeys="true">
     insert into middle_sort
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
+
       <if test="largeId != null" >
         large_id,
       </if>
@@ -39,9 +32,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
+
       <if test="largeId != null" >
         #{largeId,jdbcType=INTEGER},
       </if>
@@ -62,10 +53,5 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xinyuan.main.domain.MiddleSort" >
-    update middle_sort
-    set large_id = #{largeId,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

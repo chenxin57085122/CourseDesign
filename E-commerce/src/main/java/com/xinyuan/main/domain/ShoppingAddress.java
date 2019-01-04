@@ -17,6 +17,8 @@ public class ShoppingAddress {
 
     private String postalCode;
 
+    private String county;
+
     public Integer getId() {
         return id;
     }
@@ -79,5 +81,13 @@ public class ShoppingAddress {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode == null ? null : postalCode.trim();
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county == null ? null : county.trim();
     }
 }

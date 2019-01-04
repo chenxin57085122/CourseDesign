@@ -7,13 +7,9 @@ import org.springframework.stereotype.Component;
 public interface SmallSortMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(SmallSort record);
-
     int insertSelective(SmallSort record);
 
     SmallSort selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(SmallSort record);
-
-    int updateByPrimaryKey(SmallSort record);
 }
