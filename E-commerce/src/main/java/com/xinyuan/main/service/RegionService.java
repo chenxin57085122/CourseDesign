@@ -1,18 +1,18 @@
-package com.xinyuan.main.dao;
+package com.xinyuan.main.service;
 
 import com.xinyuan.main.domain.Region;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-public interface RegionMapper {
-
-    Region selectByPrimaryKey(Short id);
-
+/**
+ * @Auther: chenxin
+ * @Date: 2019/1/3 20:27
+ * @Description:
+ */
+public interface RegionService {
 
     /**
-     * 省
+     * 读取所有的省
      * @return
      */
     List<Region> readAll();
@@ -25,9 +25,10 @@ public interface RegionMapper {
     List<Region> readCityById(short id);
 
     /**
-     * 县
+     * 县、区
      * @param id
      * @return
      */
     List<Region> readCountyById(short id);
+
 }

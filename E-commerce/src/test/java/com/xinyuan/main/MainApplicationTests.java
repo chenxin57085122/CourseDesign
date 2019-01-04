@@ -75,6 +75,7 @@ public class MainApplicationTests {
 		user.setAccount("123456");
 		user.setPassword("1234567");
 		user.setEmail("1004498612@qq.com");
+		//System.out.println("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException");
 		System.out.println(userService.reister(user));
 	}
 

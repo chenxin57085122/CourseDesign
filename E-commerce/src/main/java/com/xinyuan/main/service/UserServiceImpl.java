@@ -27,22 +27,18 @@ public class UserServiceImpl implements UserService{
      */
     @LogAn(method = "login")
     @Override
-    public boolean login(String account,String password) {
+    public User login(String account,String password) {
 
         //邮箱正则表达式
         boolean flag = Pattern.matches("^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$",account);
         int count = 0;
         if (flag){
-            count = userMapper.loginByEmail(account, password);
+            return userMapper.loginByEmail(account, password);
         }else if(Pattern.matches("^1(3|4|5|7|8)\\d{9}$",account)){
-            count = userMapper.loginByPhone(account, password);
+            return userMapper.loginByPhone(account, password);
         }else{
-            count = userMapper.loginByAccount(account, password);
+            return userMapper.loginByAccount(account, password);
         }
-        if (count != 0)
-            return true;
-
-        return false;
     }
 
     /**
@@ -55,6 +51,18 @@ public class UserServiceImpl implements UserService{
 
         return userMapper.insertSelective(user);
     }
+
+    /**
+     * 用户信息更改
+     * @param user
+     * @return
+     */
+    @Override
+    public int updateUserInfor(User user) {
+
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
 
 
 }

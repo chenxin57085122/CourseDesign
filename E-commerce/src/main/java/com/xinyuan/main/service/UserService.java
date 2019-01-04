@@ -13,7 +13,7 @@ public interface UserService {
      * 登录验证
      * @return
      */
-    boolean login(String account,String password);
+    User login(String account,String password);
 
     /**
      * 注册账号
@@ -21,4 +21,13 @@ public interface UserService {
      * @return
      */
     int reister(User user);
+
+    /**
+     *
+     * @param user
+     * @return
+     */
+    int updateUserInfor(User user);
+
+
 }

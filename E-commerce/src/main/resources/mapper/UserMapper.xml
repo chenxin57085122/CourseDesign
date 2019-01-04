@@ -133,14 +133,14 @@
   </update>
 
   <!-- 登录验证sql -->
-  <select id="loginByAccount" resultType="integer" parameterType="String">
-    SELECT COUNT(*) FROM user WHERE account = #{account} AND password = #{password}
+  <select id="loginByAccount" resultType="com.xinyuan.main.domain.User" parameterType="String">
+    SELECT * FROM user WHERE account = #{account} AND password = #{password}
   </select>
-  <select id="loginByEmail" resultType="integer" parameterType="String">
-    SELECT COUNT(*) FROM user WHERE email = #{account} AND password = #{password}
+  <select id="loginByEmail" resultType="com.xinyuan.main.domain.User" parameterType="String">
+    SELECT * FROM user WHERE email = #{account} AND password = #{password}
   </select>
-  <select id="loginByPhone" resultType="integer" parameterType="String">
-    SELECT COUNT(*) FROM user WHERE phone = #{account} AND password = #{password}
+  <select id="loginByPhone" resultType="com.xinyuan.main.domain.User" parameterType="String">
+    SELECT * FROM user WHERE phone = #{account} AND password = #{password}
   </select>
 
 </mapper>
