@@ -6,7 +6,6 @@ import com.xinyuan.main.utils.ServiceVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -28,8 +27,7 @@ public class UserController {
     private UserService userService = null;
 
     @PostMapping("/login")
-    @ResponseStatus(code = HttpStatus.OK)
-    public ServiceVO login(@RequestBody Map<String,String> user){
+    public ServiceVO<User> login(@RequestBody Map<String,String> user){
         logger.info(user.toString());
         User res = userService.login(user.get("username"),user.get("password"));
         if (res != null){
@@ -39,16 +37,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ServiceVO reister(@RequestBody User user){
-        userService.reister(user);
-        return new ServiceVO();
+    public ServiceVO<Integer> register(@RequestBody User user){
+
+        return new ServiceVO(userService.reister(user));
     }
 
     @PostMapping("/update/userInfo")
-    public ServiceVO updateUserInfo(@RequestBody User user){
+    public ServiceVO<Integer> updateUserInfo(@RequestBody User user){
 
-        userService.reister(user);
-
-        return new ServiceVO();
+        return new ServiceVO(userService.reister(user));
     }
 }
