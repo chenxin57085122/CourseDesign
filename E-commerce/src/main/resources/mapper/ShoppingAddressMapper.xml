@@ -11,11 +11,19 @@
     <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
     <result column="postal_code" jdbcType="VARCHAR" property="postalCode" />
     <result column="county" jdbcType="VARCHAR" property="county" />
+    <result column="is_default" jdbcType="BIT" property="isDefault"/>
   </resultMap>
   <sql id="Base_Column_List">
     id, user_id, province, city, shipping_people, phone, address_detail, postal_code, 
-    county
+    county, is_default
   </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    *
+    from shopping_address
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -111,8 +119,21 @@
       <if test="county != null">
         county = #{county,jdbcType=VARCHAR},
       </if>
+      <if test="isDefault != null">
+        is_default = #{isDefault,jdbcType=BIT}
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <!--通过userId 查询所有 收货地址-->
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="int">
+    SELECT <include refid="Base_Column_List"/> FROM shopping_address
+    WHERE user_id = #{userId}
+  </select>
+  <!-- 查询 用户 默认收货地址-->
+  <select id="selectDefaultAddress" resultMap="BaseResultMap" parameterType="int">
+    SELECT <include refid="Base_Column_List"/> FROM shopping_address
+    WHERE user_id = #{userId} AND is_default = 1
+  </select>
 </mapper>
