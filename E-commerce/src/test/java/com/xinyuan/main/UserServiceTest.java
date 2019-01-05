@@ -36,4 +36,10 @@ public class UserServiceTest {
         user.setEmail("3406985294@qq.com");
         System.out.println(userService.updateUserInfor(user));
     }
+
+    @Test
+    public void selectByIdTest(){
+        User user = userService.selectByPrimaryKey(1);
+        System.out.println(user.getAccount());
+    }
 }

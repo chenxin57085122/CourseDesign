@@ -30,4 +30,14 @@ public interface UserService {
     int updateUserInfor(User user);
 
 
+    /**
+     *
+     * 功能描述: 查询用户信息
+     *
+     * @param: id
+     * @return: User
+     * @auther: chenxin
+     * @date: 2019/1/5 10:20
+     */
+    User selectByPrimaryKey(int id);
 }

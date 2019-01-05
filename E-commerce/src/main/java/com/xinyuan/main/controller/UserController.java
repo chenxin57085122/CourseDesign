@@ -45,6 +45,13 @@ public class UserController {
     @PostMapping("/update/userInfo")
     public ServiceVO<Integer> updateUserInfo(@RequestBody User user){
 
-        return new ServiceVO(userService.reister(user));
+        return new ServiceVO(userService.updateUserInfor(user));
     }
+
+    @GetMapping("/read/user/{id}")
+    public ServiceVO readUserInfoById(@PathVariable("id") int id){
+
+        return new ServiceVO(userService.selectByPrimaryKey(id));
+    }
+
 }
