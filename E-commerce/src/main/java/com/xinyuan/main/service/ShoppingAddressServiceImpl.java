@@ -20,9 +20,16 @@ public class ShoppingAddressServiceImpl implements ShoppingAddressService {
 
     @Autowired
     private ShoppingAddressMapper shoppingAddressMapper = null;
+
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     @Override
     public int insertSelective(ShoppingAddress shoppingAddress) {
+        ShoppingAddress temp = shoppingAddressMapper.selectDefaultAddress(shoppingAddress.getUserId());
+        if(temp != null && shoppingAddress.getIsDefault()){
 
+            temp.setIsDefault(false);
+            shoppingAddressMapper.updateByPrimaryKeySelective(temp);
+        }
         return shoppingAddressMapper.insertSelective(shoppingAddress);
     }
 
@@ -80,19 +87,17 @@ public class ShoppingAddressServiceImpl implements ShoppingAddressService {
     public int reviseDefaultAddress(ShoppingAddress defaultAddr) {
 
         ShoppingAddress shoppingAddress = shoppingAddressMapper.selectByPrimaryKey(defaultAddr.getId());
-        System.out.println(1);
         if (shoppingAddress != null){
-            System.out.println(shoppingAddress.getUserId());
             ShoppingAddress originAddr =  shoppingAddressMapper.selectDefaultAddress(shoppingAddress.getUserId());
             if (originAddr != null){
-                originAddr.setDefault(false);
+                originAddr.setIsDefault(false);
                 shoppingAddressMapper.updateByPrimaryKeySelective(originAddr);
-                System.out.println(2);
             }
-            defaultAddr.setDefault(true);
+            defaultAddr.setIsDefault(true);
             return shoppingAddressMapper.updateByPrimaryKeySelective(defaultAddr);
 
         }
         return 0;
     }
+
 }

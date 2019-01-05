@@ -1,8 +1,12 @@
 package com.xinyuan.main.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class User {
+public class User implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
     private Integer id;
 
     private String nickName;
@@ -111,5 +115,34 @@ public class User {
 
     public void setAnswer(String answer) {
         this.answer = answer == null ? null : answer.trim();
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"id\":")
+                .append(id);
+        sb.append(",\"nickName\":\"")
+                .append(nickName).append('\"');
+        sb.append(",\"sex\":")
+                .append(sex);
+        sb.append(",\"email\":\"")
+                .append(email).append('\"');
+        sb.append(",\"phone\":\"")
+                .append(phone).append('\"');
+        sb.append(",\"account\":\"")
+                .append(account).append('\"');
+        sb.append(",\"password\":\"")
+                .append(password).append('\"');
+        sb.append(",\"identity\":")
+                .append(identity);
+        sb.append(",\"banlance\":")
+                .append(banlance);
+        sb.append(",\"question\":\"")
+                .append(question).append('\"');
+        sb.append(",\"answer\":\"")
+                .append(answer).append('\"');
+        sb.append('}');
+        return sb.toString();
     }
 }

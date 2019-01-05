@@ -1,6 +1,10 @@
 package com.xinyuan.main.domain;
 
-public class ShoppingAddress {
+import java.io.Serializable;
+
+public class ShoppingAddress implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     private Integer id;
 
     private Integer userId;
@@ -21,11 +25,11 @@ public class ShoppingAddress {
 
     private Boolean isDefault;
 
-    public Boolean isDefault() {
+    public Boolean getIsDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean aDefault) {
+    public void setIsDefault(boolean aDefault) {
         isDefault = aDefault;
     }
 

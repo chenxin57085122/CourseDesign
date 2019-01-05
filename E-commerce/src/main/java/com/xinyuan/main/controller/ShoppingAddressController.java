@@ -31,6 +31,7 @@ public class ShoppingAddressController {
 
     @PostMapping("/insert")
     public ServiceVO insert(@RequestBody ShoppingAddress shoppingAddress){
+        System.out.println(shoppingAddress);
         return new ServiceVO(shoppingAddressService.insertSelective(shoppingAddress));
     }
 

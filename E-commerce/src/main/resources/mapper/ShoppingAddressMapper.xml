@@ -63,6 +63,9 @@
       <if test="county != null">
         county,
       </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -89,6 +92,9 @@
       </if>
       <if test="county != null">
         #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=BIT}
       </if>
     </trim>
   </insert>
