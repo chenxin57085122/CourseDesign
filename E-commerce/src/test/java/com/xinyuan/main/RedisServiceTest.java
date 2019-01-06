@@ -1,8 +1,10 @@
 package com.xinyuan.main;
 
+import com.xinyuan.main.domain.CartMap;
 import com.xinyuan.main.domain.User;
 import com.xinyuan.main.domain.vo.ShoppingCart;
 import com.xinyuan.main.service.RedisService;
+import com.xinyuan.main.service.ShoppingCartService;
 import com.xinyuan.main.utils.POJOAndJsonUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -17,7 +19,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: chenxin
@@ -39,6 +43,9 @@ public class RedisServiceTest {
 
     @Autowired
     private ListOperations listOperations = null;
+
+    @Autowired
+    private ShoppingCartService shoppingCartService = null;
 
     /**
      *
@@ -126,6 +133,57 @@ public class RedisServiceTest {
 
     @Test
     public void deleteTest(){
-        redisService.deleteKey("chenxin123456");
+        redisService.deleteKey("123456");
+    }
+
+    @Test
+    public void addCartProduct(){
+        ShoppingCart shoppingCart3 = new ShoppingCart();
+        shoppingCart3.setProductId(3);
+        BigDecimal salePrice = new BigDecimal(49);
+        shoppingCart3.setSalePrice(salePrice);
+        shoppingCart3.setProductNum(12);
+        shoppingCart3.setLimitNum(100);
+        shoppingCart3.setChecked("0");
+        shoppingCart3.setProductName("坚果 3 TPU 软胶保护套");
+        shoppingCart3.setProductImg("https://resource.smartisan.com/resource/b899d9b82c4bc2710492a26af021d484.jpg");
+        CartMap cartMap = new CartMap();
+        cartMap.setAccount("123456");
+        cartMap.setProductId(1);
+        cartMap.setProductNum(22);
+        shoppingCartService.addProduct(cartMap);
+    }
+
+
+    /**
+     *
+     * 功能描述: 选中所有的商品
+     *
+     * @param:
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/6 20:46
+     */
+    @Test
+    public void productAllchecked(){
+        Map<String, String> map = new HashMap<>();
+        map.put("account","123456");
+        map.put("checked","1");
+        System.out.println(shoppingCartService.productAllchecked(map));
+
+    }
+
+    /**
+     *
+     * 功能描述: 测试删除被选中的商品
+     *
+     * @param:
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/6 20:46
+     */
+    @Test
+    public void deleteChecked(){
+        System.out.println(shoppingCartService.deleteChecked("123456"));
     }
 }

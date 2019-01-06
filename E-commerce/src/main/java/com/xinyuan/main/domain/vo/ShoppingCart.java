@@ -20,7 +20,7 @@ public class ShoppingCart implements Serializable{
 
     private int limitNum;
 
-    private String checked;
+    private String checked = "0";
 
     private String productName;
 

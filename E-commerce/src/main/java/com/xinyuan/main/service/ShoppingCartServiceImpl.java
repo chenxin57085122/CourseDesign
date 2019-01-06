@@ -8,10 +8,12 @@ import com.xinyuan.main.utils.POJOAndJsonUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: chenxin
@@ -21,6 +23,9 @@ import java.util.List;
 @Service("shoppingCartService")
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
+
+    @Autowired
+    private RedisTemplate redisTemplate = null;
 
     @Autowired
     private ListOperations listOperations = null;
@@ -63,14 +68,28 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
          */
         ShoppingCart shoppingCart = new ShoppingCart();
         List<ShoppingCart> lists = selectShoppingCartByUserId(cartMap.getAccount());
-        for (ShoppingCart list : lists){
-            if (cartMap.getProductId() == list.getProductId()){
-                 shoppingCart = list;
-                 shoppingCart.setProductNum(cartMap.getProductNum());
-                 listOperations.leftPushAll(cartMap.getAccount(),lists);
-                 return 1;
+        redisTemplate.delete(cartMap.getAccount());
+        List<String> temp = new ArrayList<>();
+        boolean flag = false;
+        //不为空
+        if (lists != null && lists.size() != 0){
+            //循环查找被修改的商品
+            for (int i = lists.size() - 1; i > -1; i--){
+                //修改数量
+                if (cartMap.getProductId() == lists.get(i).getProductId()){
+
+                    lists.get(i).setProductNum(cartMap.getProductNum());
+                    flag = true;
+                }
+                temp.add(POJOAndJsonUtil.POJOToJson(lists.get(i)));
             }
+
         }
+        if (flag){
+            listOperations.leftPushAll(cartMap.getAccount(),temp);
+            return 1;
+        }
+
         /**
          * 在购物车中添加新的物品
          */
@@ -83,8 +102,99 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             shoppingCart.setSalePrice(product.getSalelPrice());
             shoppingCart.setProductId(cartMap.getProductId());
             shoppingCart.setProductNum(cartMap.getProductNum());
-            lists.add(shoppingCart);
-            listOperations.leftPushAll(cartMap.getAccount(),lists);
+//            lists.add(shoppingCart);
+            temp.add(POJOAndJsonUtil.POJOToJson(shoppingCart));
+            listOperations.leftPushAll(cartMap.getAccount(),temp);
+        }
+        return 0;
+    }
+
+    /**
+     * 功能描述:删除单条商品,
+     *          查询出该用户中购物车中的商品
+     *          清除缓存
+     *          删除商品
+     * @param cartMap
+     * @param:
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/6 19:42
+     */
+    @Override
+    public int deleteProduct(CartMap cartMap) {
+        List<ShoppingCart> lists = selectShoppingCartByUserId(cartMap.getAccount());
+        redisTemplate.delete(cartMap.getAccount());
+        List<String> temp = new ArrayList<>();
+        if (lists != null && lists.size() != 0) {
+            for (int i = lists.size() - 1; i > -1; i--) {
+                if (lists.get(i).getProductId() != cartMap.getProductId()) {
+                    temp.add(POJOAndJsonUtil.POJOToJson(lists.get(i)));
+                }
+            }
+            if (temp.size() != 0)
+                listOperations.leftPushAll(cartMap.getAccount(),temp);
+
+            return 1;
+        }
+
+        return 0;
+    }
+
+    /**
+     * 功能描述: 删除选中的商品
+     *          查询用户购物车商品
+     *          清除缓存
+     *          处理被选中的商品
+     * @param account
+     * @param:
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/6 20:15
+     */
+    @Override
+    public int deleteChecked(String account) {
+        /*查询购物车商品*/
+        List<ShoppingCart> lists = selectShoppingCartByUserId(account);
+        //清空缓存
+        redisTemplate.delete(account);
+        List<String> temp = new ArrayList<>();
+        if (lists != null && lists.size() != 0){
+            for (int i = lists.size() - 1; i > -1; i --){
+                //只保留未选中的商品数据
+                if (lists.get(i).getChecked() == "0"){
+                    temp.add(POJOAndJsonUtil.POJOToJson(lists.get(i)));
+                }
+            }
+            //若temp中没有商品数据
+            if (temp.size() != 0)
+                listOperations.leftPushAll(account,temp);
+
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * 功能描述: 全选商品、取消全部商品选定
+     *
+     * @param: map [ "account" : value, "checked" : value]
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/6 20:32
+     */
+    @Override
+    public int productAllchecked(Map<String, String> map) {
+        List<ShoppingCart> lists = selectShoppingCartByUserId(map.get("account"));
+        redisTemplate.delete(map.get("account"));
+        String checked = map.get("checked");
+        List<String> temp = new ArrayList<>();
+        if (lists != null && lists.size() != 0){
+            for (int i = lists.size() - 1; i > -1; i --){
+                lists.get(i).setChecked(checked);
+                temp.add(POJOAndJsonUtil.POJOToJson(lists.get(i)));
+            }
+            listOperations.leftPushAll(map.get("account"), temp);
+            return 1;
         }
         return 0;
     }
