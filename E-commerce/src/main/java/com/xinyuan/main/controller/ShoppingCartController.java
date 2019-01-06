@@ -1,6 +1,7 @@
 package com.xinyuan.main.controller;
 
 import com.xinyuan.main.domain.CartMap;
+import com.xinyuan.main.domain.CartMap02;
 import com.xinyuan.main.service.ShoppingCartService;
 import com.xinyuan.main.utils.ServiceVO;
 import org.slf4j.Logger;
@@ -102,4 +103,10 @@ public class ShoppingCartController {
         return new ServiceVO.ServiceVOBuilder().code(shoppingCatService.productAllchecked(map)).builder();
     }
 
+
+    @PostMapping("/updateProductInfo")
+    public ServiceVO updateProduct(@RequestBody CartMap02 cartMap02){
+        logger.info(cartMap02.toString());
+        return new ServiceVO.ServiceVOBuilder().code(shoppingCatService.updateProduct(cartMap02)).builder();
+    }
 }

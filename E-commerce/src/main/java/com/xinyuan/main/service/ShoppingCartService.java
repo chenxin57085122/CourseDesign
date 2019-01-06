@@ -1,6 +1,7 @@
 package com.xinyuan.main.service;
 
 import com.xinyuan.main.domain.CartMap;
+import com.xinyuan.main.domain.CartMap02;
 import com.xinyuan.main.domain.vo.ShoppingCart;
 
 import java.util.List;
@@ -66,4 +67,16 @@ public interface ShoppingCartService {
      * @date: 2019/1/6 20:32
      */
     int productAllchecked(Map<String, String> map);
+
+
+    /**
+     *
+     * 功能描述: 更新购物车商品信息
+     *
+     * @param:
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/6 21:33
+     */
+    int updateProduct(CartMap02 cartMap02);
 }

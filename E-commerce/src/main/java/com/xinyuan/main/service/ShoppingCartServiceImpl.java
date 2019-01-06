@@ -2,6 +2,7 @@ package com.xinyuan.main.service;
 
 import com.xinyuan.main.dao.ProductMapper;
 import com.xinyuan.main.domain.CartMap;
+import com.xinyuan.main.domain.CartMap02;
 import com.xinyuan.main.domain.Product;
 import com.xinyuan.main.domain.vo.ShoppingCart;
 import com.xinyuan.main.utils.POJOAndJsonUtil;
@@ -77,8 +78,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             for (int i = lists.size() - 1; i > -1; i--){
                 //修改数量
                 if (cartMap.getProductId() == lists.get(i).getProductId()){
-
-                    lists.get(i).setProductNum(cartMap.getProductNum());
+                    lists.get(i).setProductNum(cartMap.getProductNum() + lists.get(i).getProductNum());
                     flag = true;
                 }
                 temp.add(POJOAndJsonUtil.POJOToJson(lists.get(i)));
@@ -198,4 +198,34 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         }
         return 0;
     }
+
+    /**
+     * 功能描述: 更新购物车商品信息
+     *
+     * @param cartMap02
+     * @param:
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/6 21:33
+     */
+    @Override
+    public int updateProduct(CartMap02 cartMap02) {
+        List<ShoppingCart> lists = selectShoppingCartByUserId(cartMap02.getAccount());
+        redisTemplate.delete(cartMap02.getAccount());
+        List<String> temp = new ArrayList<>();
+        if (lists != null && lists.size() != 0){
+            for (int i = lists.size() - 1; i > -1; i--) {
+                if (lists.get(i).getProductId() == cartMap02.getProductId()) {
+                    lists.get(i).setChecked(cartMap02.getChecked());
+                    lists.get(i).setProductNum(cartMap02.getProductNum());
+                }
+                temp.add(POJOAndJsonUtil.POJOToJson(lists.get(i)));
+            }
+            listOperations.leftPushAll(cartMap02.getAccount(),temp);
+            return 1;
+        }
+        return 0;
+    }
+
+
 }

@@ -138,15 +138,6 @@ public class RedisServiceTest {
 
     @Test
     public void addCartProduct(){
-        ShoppingCart shoppingCart3 = new ShoppingCart();
-        shoppingCart3.setProductId(3);
-        BigDecimal salePrice = new BigDecimal(49);
-        shoppingCart3.setSalePrice(salePrice);
-        shoppingCart3.setProductNum(12);
-        shoppingCart3.setLimitNum(100);
-        shoppingCart3.setChecked("0");
-        shoppingCart3.setProductName("坚果 3 TPU 软胶保护套");
-        shoppingCart3.setProductImg("https://resource.smartisan.com/resource/b899d9b82c4bc2710492a26af021d484.jpg");
         CartMap cartMap = new CartMap();
         cartMap.setAccount("123456");
         cartMap.setProductId(1);
