@@ -101,8 +101,12 @@ public class ProductServiceImpl implements ProductService{
     public ProductVO selectAllByCondition(int page, int size, int sort, String key, int priceGt, int priceLte) {
         int start = (page - 1) * size;
         int end = page * size;
-        if (("").equals(key) || key == null) {
+        if (("null").equals(key)){
             key = null;
+        }
+        if (priceGt == -1 && priceLte == -1){
+            priceGt = 0;
+            priceLte = Integer.MAX_VALUE;
         }
         ProductVO productVO = new ProductVO();
         productVO.setData(productMapper.selectAllByCondition(start, end, sort, key, priceGt, priceLte));
