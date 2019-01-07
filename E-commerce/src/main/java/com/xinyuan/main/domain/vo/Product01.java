@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @Auther: chenxin
  * @Date: 2019/1/7 11:59
- * @Description:
+ * @Description: 用于返回produc信息给前端（String productImageSmall ---> List<String> productImageSmall）
  */
 public class Product01 {
 

@@ -1,9 +1,19 @@
-package com.xinyuan.main.domain;
+package com.xinyuan.main.domain.vo;
+
+import com.xinyuan.main.domain.PurchaseAddress;
+import com.xinyuan.main.domain.PurchaseHistoryIndetail;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-public class PurchaseHistory {
+/**
+ * @Auther: chenxin
+ * @Date: 2019/1/7 21:42
+ * @Description: 用于返回分页数据
+ */
+public class OrderVO {
+
     private Integer id;
 
     private Integer userId;
@@ -21,6 +31,10 @@ public class PurchaseHistory {
     private Date payDate;
 
     private Date finishDate;
+
+    private PurchaseAddress purchaseAddress;
+
+    List<PurchaseHistoryIndetail> goodsList;
 
     public Integer getId() {
         return id;
@@ -59,7 +73,7 @@ public class PurchaseHistory {
     }
 
     public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus == null ? null : orderStatus.trim();
+        this.orderStatus = orderStatus;
     }
 
     public Date getCreateDate() {
@@ -92,5 +106,21 @@ public class PurchaseHistory {
 
     public void setFinishDate(Date finishDate) {
         this.finishDate = finishDate;
+    }
+
+    public PurchaseAddress getPurchaseAddress() {
+        return purchaseAddress;
+    }
+
+    public void setPurchaseAddress(PurchaseAddress purchaseAddress) {
+        this.purchaseAddress = purchaseAddress;
+    }
+
+    public List<PurchaseHistoryIndetail> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<PurchaseHistoryIndetail> goodsList) {
+        this.goodsList = goodsList;
     }
 }

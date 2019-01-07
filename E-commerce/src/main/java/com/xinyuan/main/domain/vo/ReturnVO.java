@@ -5,7 +5,7 @@ package com.xinyuan.main.domain.vo;
  * @Date: 2019/1/7 16:25
  * @Description:
  */
-public class ProductVO {
+public class ReturnVO {
     private Object data;
     private int total;
 
@@ -25,7 +25,7 @@ public class ProductVO {
         this.total = total;
     }
 
-    public ProductVO(Object data, int total) {
+    public ReturnVO(Object data, int total) {
         this.data = data;
         this.total = total;
     }
@@ -41,6 +41,6 @@ public class ProductVO {
         return sb.toString();
     }
 
-    public ProductVO() {
+    public ReturnVO() {
     }
 }

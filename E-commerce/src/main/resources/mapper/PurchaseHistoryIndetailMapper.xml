@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinyuan.main.dao.PurchaseHistoryIndetailMapper" >
+  <resultMap id="BaseResultMap" type="com.xinyuan.main.domain.PurchaseHistoryIndetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="purchase_history_id" property="purchaseHistoryId" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="sale_price" property="salePrice" jdbcType="INTEGER" />
+    <result column="product_num" property="productNum" jdbcType="INTEGER" />
+    <result column="limit_num" property="limitNum" jdbcType="INTEGER" />
+    <result column="checked" property="checked" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_img" property="productImg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, purchase_history_id, product_id, sale_price, product_num, limit_num, checked, 
+    product_name, product_img
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchase_history_indetail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchase_history_indetail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xinyuan.main.domain.PurchaseHistoryIndetail" >
+    insert into purchase_history_indetail (id, purchase_history_id, product_id, 
+      sale_price, product_num, limit_num, 
+      checked, product_name, product_img
+      )
+    values (#{id,jdbcType=INTEGER}, #{purchaseHistoryId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
+      #{salePrice,jdbcType=INTEGER}, #{productNum,jdbcType=INTEGER}, #{limitNum,jdbcType=INTEGER}, 
+      #{checked,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{productImg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.PurchaseHistoryIndetail" keyProperty="id" useGeneratedKeys="true">
+    insert into purchase_history_indetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="purchaseHistoryId != null" >
+        purchase_history_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="salePrice != null" >
+        sale_price,
+      </if>
+      <if test="productNum != null" >
+        product_num,
+      </if>
+      <if test="limitNum != null" >
+        limit_num,
+      </if>
+      <if test="checked != null" >
+        checked,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productImg != null" >
+        product_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="purchaseHistoryId != null" >
+        #{purchaseHistoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="salePrice != null" >
+        #{salePrice,jdbcType=INTEGER},
+      </if>
+      <if test="productNum != null" >
+        #{productNum,jdbcType=INTEGER},
+      </if>
+      <if test="limitNum != null" >
+        #{limitNum,jdbcType=INTEGER},
+      </if>
+      <if test="checked != null" >
+        #{checked,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productImg != null" >
+        #{productImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinyuan.main.domain.PurchaseHistoryIndetail" >
+    update purchase_history_indetail
+    <set >
+      <if test="purchaseHistoryId != null" >
+        purchase_history_id = #{purchaseHistoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="salePrice != null" >
+        sale_price = #{salePrice,jdbcType=INTEGER},
+      </if>
+      <if test="productNum != null" >
+        product_num = #{productNum,jdbcType=INTEGER},
+      </if>
+      <if test="limitNum != null" >
+        limit_num = #{limitNum,jdbcType=INTEGER},
+      </if>
+      <if test="checked != null" >
+        checked = #{checked,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productImg != null" >
+        product_img = #{productImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinyuan.main.domain.PurchaseHistoryIndetail" >
+    update purchase_history_indetail
+    set purchase_history_id = #{purchaseHistoryId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      sale_price = #{salePrice,jdbcType=INTEGER},
+      product_num = #{productNum,jdbcType=INTEGER},
+      limit_num = #{limitNum,jdbcType=INTEGER},
+      checked = #{checked,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_img = #{productImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByPurchaseHistoryId" resultMap="BaseResultMap" parameterType="int">
+    SELECT <include refid="Base_Column_List"/>
+    FROM purchase_history_indetail
+    WHERE purchase_history_id = #{purchaseHistoryId}
+  </select>
+</mapper>

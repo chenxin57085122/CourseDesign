@@ -3,7 +3,7 @@ package com.xinyuan.main.service;
 import com.xinyuan.main.dao.ProductMapper;
 import com.xinyuan.main.domain.Product;
 import com.xinyuan.main.domain.vo.Product01;
-import com.xinyuan.main.domain.vo.ProductVO;
+import com.xinyuan.main.domain.vo.ReturnVO;
 import com.xinyuan.main.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,7 +98,7 @@ public class ProductServiceImpl implements ProductService{
      * @date: 2019/1/7 15:15
      */
     @Override
-    public ProductVO selectAllByCondition(int page, int size, int sort, String key, int priceGt, int priceLte) {
+    public ReturnVO selectAllByCondition(int page, int size, int sort, String key, int priceGt, int priceLte) {
         int start = (page - 1) * size;
         int end = page * size;
         if (("null").equals(key)){
@@ -108,7 +108,7 @@ public class ProductServiceImpl implements ProductService{
             priceGt = 0;
             priceLte = Integer.MAX_VALUE;
         }
-        ProductVO productVO = new ProductVO();
+        ReturnVO productVO = new ReturnVO();
         productVO.setData(productMapper.selectAllByCondition(start, end, sort, key, priceGt, priceLte));
         productVO.setTotal(productMapper.selectAllByConditionCount(key, priceGt, priceLte));
         return productVO;

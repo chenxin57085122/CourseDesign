@@ -2,7 +2,7 @@ package com.xinyuan.main.service;
 
 import com.xinyuan.main.domain.Product;
 import com.xinyuan.main.domain.vo.Product01;
-import com.xinyuan.main.domain.vo.ProductVO;
+import com.xinyuan.main.domain.vo.ReturnVO;
 
 import java.util.List;
 
@@ -66,7 +66,7 @@ public interface ProductService {
      * @auther: chenxin
      * @date: 2019/1/7 15:15
      */
-    ProductVO selectAllByCondition(int page, int size, int sort, String key, int priceGt, int priceLte);
+    ReturnVO selectAllByCondition(int page, int size, int sort, String key, int priceGt, int priceLte);
 
     /**
      *

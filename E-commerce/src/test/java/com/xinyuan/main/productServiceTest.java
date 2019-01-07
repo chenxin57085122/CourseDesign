@@ -1,7 +1,7 @@
 package com.xinyuan.main;
 
 import com.xinyuan.main.domain.Product;
-import com.xinyuan.main.domain.vo.ProductVO;
+import com.xinyuan.main.domain.vo.ReturnVO;
 import com.xinyuan.main.service.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +79,7 @@ public class productServiceTest {
 
     @Test
     public void selectAllByCondition(){
-        ProductVO productVO = productService.selectAllByCondition(1,10,1,"撒旦",0,100);
+        ReturnVO productVO = productService.selectAllByCondition(1,10,1,"撒旦",0,100);
         List<Product> products = (List<Product>) productVO.getData();
         for (Product product : products){
             System.out.println(product);

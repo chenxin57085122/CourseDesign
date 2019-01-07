@@ -1,94 +1,184 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xinyuan.main.dao.PurchaseHistoryMapper" >
-  <resultMap id="BaseResultMap" type="com.xinyuan.main.domain.PurchaseHistory" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="orderNumber" property="ordernumber" jdbcType="VARCHAR" />
-    <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
-    <result column="purchase_time" property="purchaseTime" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinyuan.main.dao.PurchaseHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.xinyuan.main.domain.PurchaseHistory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="order_total" jdbcType="DECIMAL" property="orderTotal" />
+    <result column="purchase_time" jdbcType="TIMESTAMP" property="purchaseTime" />
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="close_date" jdbcType="TIMESTAMP" property="closeDate" />
+    <result column="pay_date" jdbcType="TIMESTAMP" property="payDate" />
+    <result column="finish_date" jdbcType="TIMESTAMP" property="finishDate" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, user_id, orderNumber, total_price, purchase_time, status
+  <sql id="Base_Column_List">
+    id, user_id, order_total, purchase_time, order_status, create_date, close_date, pay_date,
+    finish_date
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM purchase_history
+    order_status = "0"
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from purchase_history
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from purchase_history
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xinyuan.main.domain.PurchaseHistory" >
-    insert into purchase_history (id, user_id, orderNumber, 
-      total_price, purchase_time, status
+  <insert id="insert" parameterType="com.xinyuan.main.domain.PurchaseHistory">
+    insert into purchase_history (id, user_id, order_total,
+      purchase_time, order_status, create_date,
+      close_date, pay_date, finish_date
       )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{ordernumber,jdbcType=VARCHAR}, 
-      #{totalPrice,jdbcType=DECIMAL}, #{purchaseTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderTotal,jdbcType=DECIMAL},
+      #{purchaseTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+      #{closeDate,jdbcType=TIMESTAMP}, #{payDate,jdbcType=TIMESTAMP}, #{finishDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.PurchaseHistory" keyProperty="id" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.PurchaseHistory" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
     insert into purchase_history
-    <trim prefix="(" suffix=")" suffixOverrides="," >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
 
-      <if test="userId != null" >
+      <if test="userId != null">
         user_id,
       </if>
-      <if test="ordernumber != null" >
-        orderNumber,
+      <if test="orderTotal != null">
+        order_total,
       </if>
-      <if test="totalPrice != null" >
-        total_price,
-      </if>
-      <if test="purchaseTime != null" >
+      <if test="purchaseTime != null">
         purchase_time,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="closeDate != null">
+        close_date,
+      </if>
+      <if test="payDate != null">
+        pay_date,
+      </if>
+      <if test="finishDate != null">
+        finish_date,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
 
-      <if test="userId != null" >
+      <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="ordernumber != null" >
-        #{ordernumber,jdbcType=VARCHAR},
+      <if test="orderTotal != null">
+        #{orderTotal,jdbcType=DECIMAL},
       </if>
-      <if test="totalPrice != null" >
-        #{totalPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="purchaseTime != null" >
+      <if test="purchaseTime != null">
         #{purchaseTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeDate != null">
+        #{closeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payDate != null">
+        #{payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishDate != null">
+        #{finishDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
+    <selectKey resultType="int" keyProperty="id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xinyuan.main.domain.PurchaseHistory" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinyuan.main.domain.PurchaseHistory">
     update purchase_history
-    <set >
-      <if test="userId != null" >
+    <set>
+      <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="ordernumber != null" >
-        orderNumber = #{ordernumber,jdbcType=VARCHAR},
+      <if test="orderTotal != null">
+        order_total = #{orderTotal,jdbcType=DECIMAL},
       </if>
-      <if test="totalPrice != null" >
-        total_price = #{totalPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="purchaseTime != null" >
+      <if test="purchaseTime != null">
         purchase_time = #{purchaseTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeDate != null">
+        close_date = #{closeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payDate != null">
+        pay_date = #{payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishDate != null">
+        finish_date = #{finishDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinyuan.main.domain.PurchaseHistory">
+    update purchase_history
+    set user_id = #{userId,jdbcType=INTEGER},
+      order_total = #{orderTotal,jdbcType=DECIMAL},
+      purchase_time = #{purchaseTime,jdbcType=TIMESTAMP},
+      order_status = #{orderStatus,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      close_date = #{closeDate,jdbcType=TIMESTAMP},
+      pay_date = #{payDate,jdbcType=TIMESTAMP},
+      finish_date = #{finishDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 
+  <resultMap id="OrderVOResultMap" type="com.xinyuan.main.domain.vo.OrderVO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="order_total" jdbcType="DECIMAL" property="orderTotal" />
+    <result column="purchase_time" jdbcType="TIMESTAMP" property="purchaseTime" />
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="close_date" jdbcType="TIMESTAMP" property="closeDate" />
+    <result column="pay_date" jdbcType="TIMESTAMP" property="payDate" />
+    <result column="finish_date" jdbcType="TIMESTAMP" property="finishDate" />
+    <association property="purchaseAddress" column="id"
+                 select="com.xinyuan.main.dao.PurchaseAddressMapper.selectByPrimaryKey" />
+    <association property="goodsList" column="id"
+                 select="com.xinyuan.main.dao.PurchaseHistoryIndetailMapper.selectByPurchaseHistoryId" />
+  </resultMap>
+
+  <!-- 查询用户所有订单(分页) -->
+  <select id="selectAllByUserId" resultMap="OrderVOResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM purchase_history
+    WHERE user_id = #{userId}
+    limit #{start},#{end}
+  </select>
+
+  <select id="selectAllByUserIdCount" resultType="int">
+    SELECT COUNT(*)
+    FROM purchase_history
+    WHERE user_id = #{userId}
+  </select>
+
+   <select id="readAll" resultMap="OrderVOResultMap" parameterType="int">
+     SELECT <include refid="Base_Column_List"/>
+     FROM purchase_history
+     WHERE id = #{id}
+   </select>
 </mapper>
