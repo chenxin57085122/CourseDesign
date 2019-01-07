@@ -48,7 +48,7 @@ public class ProductController {
      * @auther: chenxin
      * @date: 2019/1/7 15:42
      */
-    @GetMapping("/selectByCondition/{page}/{size}/{sort}/{priceGt}/{priceLte}")
+    @GetMapping("/selectByCondition/{page}/{size}/{sort}/{key}/{priceGt}/{priceLte}")
     public ServiceVO selectByCondition(@PathVariable("page") int page, @PathVariable("size") int size,
                                        @PathVariable("sort") int sort, @PathVariable("key") String key,
                                        @PathVariable("priceGt") int priceGt, @PathVariable("priceLte") int priceLte){
