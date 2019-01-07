@@ -1,9 +1,16 @@
-package com.xinyuan.main.domain;
+package com.xinyuan.main.domain.vo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-public class Product {
+/**
+ * @Auther: chenxin
+ * @Date: 2019/1/7 11:59
+ * @Description:
+ */
+public class Product01 {
+
     private Integer id;
 
     private String productId;
@@ -24,7 +31,7 @@ public class Product {
 
     private String detail;
 
-    private String productImageSmall;
+    private List<String> productImageSmall;
 
     private Date shelfTime;
 
@@ -47,7 +54,7 @@ public class Product {
     }
 
     public void setProductId(String productId) {
-        this.productId = productId == null ? null : productId.trim();
+        this.productId = productId;
     }
 
     public String getProductName() {
@@ -55,7 +62,7 @@ public class Product {
     }
 
     public void setProductName(String productName) {
-        this.productName = productName == null ? null : productName.trim();
+        this.productName = productName;
     }
 
     public Integer getSmallId() {
@@ -71,7 +78,7 @@ public class Product {
     }
 
     public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle == null ? null : subTitle.trim();
+        this.subTitle = subTitle;
     }
 
     public Integer getLimitNum() {
@@ -103,7 +110,7 @@ public class Product {
     }
 
     public void setProductImageBig(String productImageBig) {
-        this.productImageBig = productImageBig == null ? null : productImageBig.trim();
+        this.productImageBig = productImageBig;
     }
 
     public String getDetail() {
@@ -111,15 +118,15 @@ public class Product {
     }
 
     public void setDetail(String detail) {
-        this.detail = detail == null ? null : detail.trim();
+        this.detail = detail;
     }
 
-    public String getProductImageSmall() {
+    public List<String> getProductImageSmall() {
         return productImageSmall;
     }
 
-    public void setProductImageSmall(String productImageSmall) {
-        this.productImageSmall = productImageSmall == null ? null : productImageSmall.trim();
+    public void setProductImageSmall(List<String> productImageSmall) {
+        this.productImageSmall = productImageSmall;
     }
 
     public Date getShelfTime() {
@@ -177,8 +184,8 @@ public class Product {
                 .append(productImageBig).append('\"');
         sb.append(",\"detail\":\"")
                 .append(detail).append('\"');
-        sb.append(",\"productImageSmall\":\"")
-                .append(productImageSmall).append('\"');
+        sb.append(",\"productImageSmall\":")
+                .append(productImageSmall);
         sb.append(",\"shelfTime\":\"")
                 .append(shelfTime).append('\"');
         sb.append(",\"clickNumber\":")
@@ -189,5 +196,88 @@ public class Product {
                 .append(seller);
         sb.append('}');
         return sb.toString();
+    }
+
+    public static class Builder{
+        private Product01 product01 = new Product01();
+
+        public Builder id(int id){
+            product01.id = id;
+            return this;
+        }
+
+        public Builder productId(String productId){
+            product01.productId = productId;
+            return this;
+        }
+
+        public Builder productName(String productName){
+            product01.productName = productName;
+            return this;
+        }
+
+        public Builder smallId(int smallId){
+            product01.smallId = smallId;
+            return this;
+        }
+
+        public Builder subTitle(String subTitle){
+            product01.subTitle = subTitle;
+            return this;
+        }
+
+        public Builder limitNum(int limitNum){
+            product01.limitNum = limitNum;
+            return this;
+        }
+
+        public Builder salelPrice(BigDecimal salelPrice){
+            product01.salelPrice = salelPrice;
+            return this;
+        }
+
+        public Builder ordinaryPrice(BigDecimal ordinaryPrice){
+            product01.ordinaryPrice = ordinaryPrice;
+            return this;
+        }
+
+        public Builder productImageBig(String productImageBig){
+            product01.productImageBig = productImageBig;
+            return this;
+        }
+
+        public Builder detail(String detail){
+            product01.detail = detail;
+            return this;
+        }
+
+        public Builder productImageSmall(List<String> productImageSmall){
+            product01.productImageSmall = productImageSmall;
+            return this;
+        }
+
+        public Builder shelfTime(Date shelfTime){
+            product01.shelfTime = shelfTime;
+            return this;
+        }
+
+        public Builder clickNumber(int clickNumber){
+            product01.clickNumber = clickNumber;
+            return this;
+        }
+
+        public Builder weight(int weight){
+            product01.weight = weight;
+            return this;
+        }
+
+        public Builder seller(int seller){
+            product01.seller = seller;
+            return this;
+        }
+
+        public Product01 create(){
+            return product01;
+        }
     }
 }

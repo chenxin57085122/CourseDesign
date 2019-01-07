@@ -161,9 +161,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         if (lists != null && lists.size() != 0){
             for (int i = lists.size() - 1; i > -1; i --){
                 //只保留未选中的商品数据
-                if (lists.get(i).getChecked() == "0"){
+                if (lists.get(i).getChecked().equals("0")){
+                    System.out.println("被选中" + lists.get(i));
                     temp.add(POJOAndJsonUtil.POJOToJson(lists.get(i)));
                 }
+                System.out.println("未被选中" + lists.get(i));
             }
             //若temp中没有商品数据
             if (temp.size() != 0)

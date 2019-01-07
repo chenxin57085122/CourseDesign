@@ -23,6 +23,9 @@
     product_image_big, detail, product_image_small, shelf_time, click_number, weight, 
     seller
   </sql>
+  <sql id="less_Column">
+    id, product_id, product_name, sub_title, product_image_big, salel_price
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -175,6 +178,40 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <!--查询商品按照：价格区间、第几页、每页数量，排序-->
+  <select id="selectAllByCondition" resultMap="BaseResultMap">
+    SELECT distinct  <include refid="less_Column" />
+    FROM product
+    WHERE
+    salel_price &lt;= #{priceLte} AND salel_price &gt;= #{priceGt}
+    <if test=" key != null">
+      AND ( product_name LIKE CONCAT('%',#{key},'%') OR
+      sub_title LIKE CONCAT('%',#{key},'%') )
+    </if>
+    <if test="sort == 1">
+      ORDER BY salel_price ASC
+    </if>
+    <if test="sort == -1">
+      ORDER BY salel_price DESC
+    </if>
+    limit #{start}, #{end}
+  </select>
 
+  <select id="selectAllByConditionCount" resultType="int">
+    SELECT DISTINCT COUNT(*) FROM product
+    WHERE
+    salel_price &lt;= #{priceLte} AND salel_price &gt;= #{priceGt}
+    <if test=" key != null">
+      AND ( product_name LIKE CONCAT('%',#{key},'%') OR
+      sub_title LIKE CONCAT('%',#{key},'%') )
+    </if>
+  </select>
 
+  <select id="selectAllByConditionName" resultType="String">
+    SELECT DISTINCT product_name FROM product
+    WHERE
+      product_name LIKE CONCAT('%',#{key},'%')
+        OR
+      sub_title LIKE CONCAT('%',#{key},'%')
+  </select>
 </mapper>
