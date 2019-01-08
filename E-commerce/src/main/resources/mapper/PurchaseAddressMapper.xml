@@ -17,6 +17,15 @@
     id, user_id, user_name, tel, street_name, is_default, purchase_history_id, area, 
     city, province
   </sql>
+  <!-- 通过订单Id查询订单地址 -->
+
+  <select id="selectByPurchaseHistoryId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from purchase_address
+    where purchase_history_id = #{id,jdbcType=INTEGER}
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

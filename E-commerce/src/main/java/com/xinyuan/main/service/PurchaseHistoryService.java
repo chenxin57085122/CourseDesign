@@ -1,5 +1,6 @@
 package com.xinyuan.main.service;
 
+import com.xinyuan.main.domain.PurchaseHistory;
 import com.xinyuan.main.domain.vo.OrderVO;
 import com.xinyuan.main.domain.vo.PurchaseInfo;
 import com.xinyuan.main.domain.vo.ReturnVO;
@@ -56,4 +57,26 @@ public interface PurchaseHistoryService {
      * @date: 2019/1/8 0:01
      */
     OrderVO read(int id);
+
+    /**
+     *
+     * 功能描述: 删除订单详情
+     *
+     * @param:
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/8 20:29
+     */
+    int deleteByPrimaryKey(int id);
+
+    /**
+     *
+     * 功能描述: 更新订单信息
+     *
+     * @param:
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/8 22:02
+     */
+    int updateInfo(PurchaseHistory purchaseHistory);
 }

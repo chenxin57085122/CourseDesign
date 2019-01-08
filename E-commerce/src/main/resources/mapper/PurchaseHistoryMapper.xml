@@ -43,7 +43,7 @@
       #{closeDate,jdbcType=TIMESTAMP}, #{payDate,jdbcType=TIMESTAMP}, #{finishDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.PurchaseHistory" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.xinyuan.main.domain.PurchaseHistory" keyProperty="id" useGeneratedKeys="true">
     insert into purchase_history
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
@@ -99,9 +99,7 @@
         #{finishDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
-    <selectKey resultType="int" keyProperty="id" order="AFTER">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.xinyuan.main.domain.PurchaseHistory">
     update purchase_history
@@ -157,7 +155,7 @@
     <result column="pay_date" jdbcType="TIMESTAMP" property="payDate" />
     <result column="finish_date" jdbcType="TIMESTAMP" property="finishDate" />
     <association property="purchaseAddress" column="id"
-                 select="com.xinyuan.main.dao.PurchaseAddressMapper.selectByPrimaryKey" />
+                 select="com.xinyuan.main.dao.PurchaseAddressMapper.selectByPurchaseHistoryId" />
     <association property="goodsList" column="id"
                  select="com.xinyuan.main.dao.PurchaseHistoryIndetailMapper.selectByPurchaseHistoryId" />
   </resultMap>

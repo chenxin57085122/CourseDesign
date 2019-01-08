@@ -74,7 +74,8 @@ public class PurchaseHistoryServiceImpl implements PurchaseHistoryService{
         purchaseHistory.setOrderStatus("0");
         purchaseHistory.setCreateDate(new Date());
         purchaseHistory.setCloseDate(DateUtil.addTime());
-        int id = purchaseHistoryMapper.insertSelective(purchaseHistory);
+        purchaseHistoryMapper.insertSelective(purchaseHistory);
+        int id = purchaseHistory.getId();
         //构建PurchaseHistoryIndetail 列表
         purchaseHistoryIndetail = purchaseInfo.getGoodsList();
         for (PurchaseHistoryIndetail temp : purchaseHistoryIndetail){
@@ -93,7 +94,7 @@ public class PurchaseHistoryServiceImpl implements PurchaseHistoryService{
         String s = purchaseInfo.getUserId() + "";
         purchaseAddress.setUserId(s);
         purchaseAddressMapper.insertSelective(purchaseAddress);
-        return 0;
+        return id;
     }
 
     /**
@@ -125,6 +126,35 @@ public class PurchaseHistoryServiceImpl implements PurchaseHistoryService{
     @Override
     public OrderVO read(int id) {
         return purchaseHistoryMapper.readAll(id);
+    }
+
+    /**
+     * 功能描述: 删除订单详情
+     *
+     * @param id
+     * @param:
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/8 20:29
+     */
+    @Override
+    public int deleteByPrimaryKey(int id) {
+        return purchaseHistoryMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 功能描述: 更新订单信息
+     *
+     * @param purchaseHistory
+     * @param:
+     * @return:
+     * @auther: chenxin
+     * @date: 2019/1/8 22:02
+     */
+    @Override
+    public int updateInfo(PurchaseHistory purchaseHistory) {
+
+        return purchaseHistoryMapper.updateByPrimaryKeySelective(purchaseHistory);
     }
 
 

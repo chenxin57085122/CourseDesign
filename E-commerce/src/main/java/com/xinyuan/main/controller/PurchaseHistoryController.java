@@ -1,10 +1,14 @@
 package com.xinyuan.main.controller;
 
+import com.xinyuan.main.domain.PurchaseHistory;
 import com.xinyuan.main.domain.vo.PurchaseInfo;
 import com.xinyuan.main.service.PurchaseHistoryService;
 import com.xinyuan.main.utils.ServiceVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Auther: chenxin
@@ -45,8 +49,10 @@ public class PurchaseHistoryController {
      */
     @PostMapping("/insert")
     public ServiceVO insertInfo(@RequestBody PurchaseInfo purchaseInfo){
-
-        return new ServiceVO.ServiceVOBuilder().code(purchaseHistoryService.insertInfo(purchaseInfo)).builder();
+        int id = purchaseHistoryService.insertInfo(purchaseInfo);
+        Map<String,Integer> map = new HashMap<>();
+        map.put("id",id);
+        return new ServiceVO.ServiceVOBuilder().code(0).context(map).builder();
     }
 
     /**
@@ -74,6 +80,19 @@ public class PurchaseHistoryController {
      */
     @GetMapping("/read/{id}")
     public ServiceVO read(@PathVariable("id") int id){
-        return new ServiceVO(purchaseHistoryService.cancelOrder(id));
+        return new ServiceVO(purchaseHistoryService.read(id));
     }
+
+
+    @DeleteMapping("/delete/{id}")
+    public ServiceVO delete(@PathVariable("id") int id){
+        return new ServiceVO.ServiceVOBuilder().code(purchaseHistoryService.deleteByPrimaryKey(id)).builder();
+    }
+
+    @PostMapping("/update")
+    public ServiceVO updateInfo(@RequestBody PurchaseHistory purchaseInfo) {
+
+        return new ServiceVO.ServiceVOBuilder().code(purchaseHistoryService.updateInfo(purchaseInfo)).builder();
+    }
+
 }

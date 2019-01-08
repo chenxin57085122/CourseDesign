@@ -1,10 +1,7 @@
 package com.xinyuan.main.controller;
 
 import com.xinyuan.main.utils.FastDFSUtil;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -27,7 +24,8 @@ public class FileController {
      */
 
     @PostMapping("/upload")
-    public String upload(@RequestBody MultipartFile multipartFile){
-        return FastDFSUtil.uploadFile(multipartFile);
+    public String upload(@RequestParam("file") MultipartFile file){
+
+        return FastDFSUtil.uploadFile(file);
     }
 }

@@ -16,4 +16,6 @@ public interface PurchaseAddressMapper {
     int updateByPrimaryKeySelective(PurchaseAddress record);
 
     int updateByPrimaryKey(PurchaseAddress record);
+
+    PurchaseAddress selectByPurchaseHistoryId(int id);
 }

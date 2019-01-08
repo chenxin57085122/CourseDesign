@@ -8,7 +8,7 @@ import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import java.io.*;
 
 /**
  * @Auther: chenxin
@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 public class FastDFSUtil {
 
-    public static final String URL = "39.108.191.78";
+    public static final String URL = "http://39.108.191.78";
     private static TrackerClient trackerClient;
     private static TrackerServer trackerServer;
     private static StorageClient storageClient;
@@ -50,8 +50,9 @@ public class FastDFSUtil {
             mata_list[0] = new NameValuePair("fileName",file.getName());
             mata_list[1] = new NameValuePair("fileExt",file.getContentType());
             mata_list[2] = new NameValuePair("fileSize",String.valueOf(file.getSize()));
-            str = storageClient.upload_file(file.getBytes(), file.getContentType(), mata_list);
-
+            String[] tempStr  = file.getContentType().split( "/");
+            String suffix = tempStr[tempStr.length - 1];
+            str = storageClient.upload_file(file.getBytes(), suffix, mata_list);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,5 +67,39 @@ public class FastDFSUtil {
             path = path +"/"+ target;
         }
         return path;
+    }
+
+    public static void main(String[] args) {
+
+        byte[] buffer = null;
+
+        File file = new File("E:\\123.jpg");
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] b = new byte[1024];
+            int n;
+            while ((n = fis.read(b)) != -1)
+            {
+                bos.write(b, 0, n);
+            }
+            fis.close();
+            bos.close();
+            buffer = bos.toByteArray();
+            String[] strings = storageClient.upload_file(buffer,file.getName(),null);
+            System.out.println(strings);
+            for (String s : strings){
+                System.out.println(s);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch (IOException e)
+        {
+            e.printStackTrace();
+        } catch (MyException e) {
+            e.printStackTrace();
+        }
+
     }
 }
