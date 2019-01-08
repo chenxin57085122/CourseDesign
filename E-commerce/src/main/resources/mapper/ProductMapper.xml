@@ -180,7 +180,7 @@
 
   <!--查询商品按照：价格区间、第几页、每页数量，排序-->
   <select id="selectAllByCondition" resultMap="BaseResultMap">
-    SELECT distinct  <include refid="less_Column" />
+    SELECT distinct  <include refid="Base_Column_List" />
     FROM product
     WHERE
     salel_price &lt;= #{priceLte} AND salel_price &gt;= #{priceGt}
